@@ -21,6 +21,11 @@ const playerSchema = new Schema(
             default: false,
             required: false,
         },
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
     },
     {
         timestamps: true,
