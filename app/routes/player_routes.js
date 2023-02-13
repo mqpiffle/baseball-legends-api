@@ -18,25 +18,27 @@ const router = express.Router()
 
 // INDEX
 // GET /players
-router.get('/players', requireToken, (req, res, next) => {
+router.get('/players', (req, res, next) => {
     Player.find()
+        .populate('owner')
         .then(players => {
             // `players` will be an array of Mongoose documents
             // we want to convert each one to a POJO, so we use `.map` to
             // apply `.toObject` to each one
-            return players.map(playere => player.toObject())
+            return players.map(players => players.toObject())
         })
         // respond with status 200 and JSON of the player
-        .then(examples => res.status(200).json({ players: players }))
+        .then(players => res.status(200).json({ players: players }))
         // if an error occurs, pass it to the handler
         .catch(next)
 })
 
 // SHOW
 // GET /players/5a7db6c74d55bc51bdf39793
-router.get('/players/:id', requireToken, (req, res, next) => {
+router.get('/players/:id', (req, res, next) => {
     // req.params.id will be set based on the `:id` in the route
     Player.findById(req.params.id)
+        .populate('owner')
         .then(handle404)
         // if `findById` is succesful, respond with 200 and "player" JSON
         .then(player => res.status(200).json({ player: player.toObject() }))
@@ -46,7 +48,8 @@ router.get('/players/:id', requireToken, (req, res, next) => {
 
 // CREATE
 // POST /players
-router.post('/player', requireToken, (req, res, next) => {
+router.post('/players', requireToken, (req, res, next) => {
+    console.log(req.user)
     // set owner of new player to be current user
     req.body.player.owner = req.user.id
 

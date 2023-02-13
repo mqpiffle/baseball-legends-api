@@ -10,10 +10,20 @@ const playerSchema = new Schema(
         },
         positions: {
             type: [String],
+            enum: ['1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'C', 'P', 'DH'],
+            default: '1B',
             required: true,
         },
         leagues: {
             type: [String],
+            enum: [
+                'American League',
+                'National League',
+                'Negro American League',
+                'Negro National League',
+                'Negro League',
+            ],
+            deafault: 'American League',
             required: true,
         },
         baseballHoF: {
@@ -28,7 +38,9 @@ const playerSchema = new Schema(
     },
     {
         timestamps: true,
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true },
     }
 )
 
-module.exports = model('Players', playerSchema)
+module.exports = model('Player', playerSchema)
