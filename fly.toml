@@ -7,8 +7,9 @@ processes = []
 
 [env]
   PORT = "8080"
-  MONGODB_URI = "mongodb+srv://ewe042217:ewe042217@cluster0.1lknk4e.mongodb.net/baseball-legends?retryWrites=true&w=majority"
-  
+  MONGODB_URI = "mongodb+srv://ewe042217:ewe042217@cluster0.1lknk4e.mongodb.net/baseballlegends?retryWrites=true&w=majority"
+  CLIENT_ORIGIN = "https://baseball-legends-client.netlify.app"
+
 [experimental]
   auto_rollback = true
 
