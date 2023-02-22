@@ -5,6 +5,9 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
+[build]
+  builder = "heroku/buildpacks:20"
+
 [env]
   PORT = "8080"
   MONGODB_URI = "mongodb+srv://ewe042217:ewe042217@cluster0.1lknk4e.mongodb.net/baseballlegends?retryWrites=true&w=majority"
